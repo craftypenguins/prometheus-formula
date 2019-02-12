@@ -1,0 +1,17 @@
+{% import_yaml "prometheus/defaults.yaml" as defaults %}
+{% import_yaml "prometheus/osmap.yaml" as osmap %}
+
+{% set os = salt['grains.filter_by'](
+  osmap,
+  merge=salt['pillar.get']('prometheus:lookup', {}),
+)
+%}
+
+{% do defaults.prometheus.update(os) %}
+
+{% set prometheus = salt['pillar.get'](
+  'prometheus',
+  default=defaults.prometheus,
+  merge=True,
+)
+%}

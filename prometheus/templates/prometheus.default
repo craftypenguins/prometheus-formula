@@ -1,0 +1,5 @@
+{% from "prometheus/map.jinja" import prometheus with context %}
+
+# THIS FILE IS MANAGED BY SALT
+
+ARGS="--config.file {{ prometheus.config_file }} --web.external-url {{ prometheus.external_url }} --storage.tsdb.path {{ prometheus.datadir }} --storage.tsdb.retention {{ prometheus.retention }} --web.console.templates={{ prometheus.web_console_templates }} --web.console.libraries={{ prometheus.web_console_libraries }}"
